@@ -7,7 +7,7 @@ def count_letters(word):
                 mydictionary[c] = 1
     print(mydictionary)
 
-count_letters("peepeepoopoo skibidi rizz")
+count_letters("skibidi rizz")
 
 
     
