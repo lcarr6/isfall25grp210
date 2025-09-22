@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Movie Rating WebApp</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #ffecd2, #fcb69f);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .container {
+      background: #fff;
+      border-radius: 20px;
+      padding: 30px;
+      width: 400px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+      text-align: center;
+    }
+
+    h1 {
+      color: #b22222;
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      text-align: left;
+      font-weight: bold;
+      margin: 12px 0 6px;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      font-size: 1rem;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 12px;
+      width: 100%;
+      background: #b22222;
+      color: #fff;
+      font-size: 1rem;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+
+    button:hover {
+      background: #8b0000;
+    }
+
+    #results {
+      margin-top: 25px;
+      padding: 20px;
+      border-radius: 15px;
+      background: #fafafa;
+      box-shadow: inset 0 0 6px rgba(0,0,0,0.1);
+    }
+
+    .category {
+      display: block;
+      font-weight: bold;
+      font-size: 1.2rem;
+      margin-top: 10px;
+      color: #d35400;
+    }
+
+    .icons {
+      font-size: 2rem;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🍿 Movie Rating</h1>
+    <form id="ratingForm">
+      <label for="movie">Movie Title:</label>
+      <input type="text" id="movie" required>
+
+      <label for="rating1">Rating 1 (0-100):</label>
+      <input type="number" id="rating1" min="0" max="100" required>
+
+      <label for="rating2">Rating 2 (0-100):</label>
+      <input type="number" id="rating2" min="0" max="100" required>
+
+      <label for="rating3">Rating 3 (0-100):</label>
+      <input type="number" id="rating3" min="0" max="100" required>
+
+      <button type="submit">Calculate Rating</button>
+    </form>
+
+    <div id="results" style="display:none;"></div>
+  </div>
+
+  <script>
+    document.getElementById("ratingForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      const movieTitle = document.getElementById("movie").value;
+      const r1 = parseFloat(document.getElementById("rating1").value);
+      const r2 = parseFloat(document.getElementById("rating2").value);
+      const r3 = parseFloat(document.getElementById("rating3").value);
+
+      const average = (r1 + r2 + r3) / 3;
+
+      let category = "";
+      let icons = "";
+
+      if (average >= 90) {
+        category = "Smokin'";
+        icons = "🌶️🌶️🌶️";
+      } else if (average >= 75) {
+        category = "Pretty Hot";
+        icons = "🌶️🌶️";
+      } else if (average >= 50) {
+        category = "Mild";
+        icons = "🌶️";
+      } else {
+        category = "Ice Cold";
+        icons = "🧊";
+      }
+
+      const resultsDiv = document.getElementById("results");
+      resultsDiv.style.display = "block";
+      resultsDiv.innerHTML = `
+        <h2>${movieTitle}</h2>
+        <p>Average Rating: ${average.toFixed(1)}%</p>
+        <span class="category">${category}</span>
+        <div class="icons">${icons}</div>
+      `;
+    });
+  </script>
+</body>
+</html>
